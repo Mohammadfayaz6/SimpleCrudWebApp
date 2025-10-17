@@ -11,7 +11,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy
-            .WithOrigins("https://simple-crud-app-livid.vercel.app/") // frontend React URL
+            .WithOrigins("http://localhost:3000") // frontend React URL
             .AllowAnyHeader()
             .AllowAnyMethod();
     });

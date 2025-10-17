@@ -10,7 +10,7 @@ namespace SimpleCrudWebApp.Write.Employee
         public string? Location { get; set; }
         public DateOnly? DateOfBirth  { get; set; }
 
-        public List<SalaryDetailDto> SalaryDetails { get; set; }
+        //public List<SalaryDetailDto> SalaryDetails { get; set; }
 
 
     }
@@ -23,7 +23,7 @@ namespace SimpleCrudWebApp.Write.Employee
         public string? Email { get; set; }
         public string? Location { get; set; }
         public DateOnly? DateOfBirth { get; set; }
-        public List<SalaryDetailDto> SalaryDetails { get; set; }
+        //public List<SalaryDetailDto> SalaryDetails { get; set; }
 
 
     }

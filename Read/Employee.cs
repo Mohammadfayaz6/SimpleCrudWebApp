@@ -9,7 +9,7 @@
         public string? Location { get; set; }
         public DateOnly? DateOfBirth { get; set; }
 
-        public List<SalaryDetail> SalaryDetails { get; set; }
+        //public List<SalaryDetail> SalaryDetails { get; set; }
     }
 
     // Read/SalaryDetail.cs

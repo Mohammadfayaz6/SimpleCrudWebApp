@@ -21,9 +21,21 @@ public partial class OrgDbContext : DbContext
     public virtual DbSet<SalaryDetail> SalaryDetails { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=Organization;Trusted_Connection=True;TrustServerCertificate=True;");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            // Try to read the connection string from environment variable first (used in deployment)
+            var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
 
+            // If not found, fallback to local SQL Express for development
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                connectionString = "Server=localhost\\SQLEXPRESS;Database=Organization;Trusted_Connection=True;TrustServerCertificate=True;";
+            }
+
+            optionsBuilder.UseSqlServer(connectionString);
+        }
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<SalaryDetail>(entity =>
