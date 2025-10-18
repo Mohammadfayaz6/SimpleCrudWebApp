@@ -5,7 +5,7 @@ using SimpleCrudWebApp.Models;
 
 namespace SimpleCrudWebApp.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {
@@ -38,7 +38,7 @@ namespace SimpleCrudWebApp.Controllers
             await employeeRepositorycs.UpdateAsync(employee);
             return Ok();
         }
-        [HttpGet("GetAll")]
+        [HttpGet("getall")]
         public async Task<IActionResult> GetAllEmployees()
         {
             var employees = await employeeRepositorycs.GetAllEmployeesDetails();

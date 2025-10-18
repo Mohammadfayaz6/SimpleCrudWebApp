@@ -11,11 +11,12 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy
-            .WithOrigins("http://localhost:3000") // frontend React URL
+            .WithOrigins("https://crudweb-app.netlify.app")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
 });
+
 
 builder.Services.AddDbContext<OrgDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -29,16 +30,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IEmployeeRepositorycs, EmployeeRepository>();
-// Assuming you have an ISalary interface and SalaryDetailsRepository implementation
 builder.Services.AddScoped<ISalaryDetailsRepository, SalaryDetailsRepository>();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 
 // Use CORS

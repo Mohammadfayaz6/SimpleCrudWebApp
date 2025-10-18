@@ -24,18 +24,10 @@ public partial class OrgDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            // Try to read the connection string from environment variable first (used in deployment)
-            var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
-
-            // If not found, fallback to local SQL Express for development
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                connectionString = "Server=localhost\\SQLEXPRESS;Database=Organization;Trusted_Connection=True;TrustServerCertificate=True;";
-            }
-
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer("name=ConnectionStrings:DefaultConnection");
         }
     }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<SalaryDetail>(entity =>
